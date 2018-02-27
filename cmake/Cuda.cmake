@@ -174,6 +174,7 @@ function(detect_cuDNN)
 
   find_path(CUDNN_INCLUDE cudnn.h
             PATHS ${CUDNN_ROOT} $ENV{CUDNN_ROOT} ${CUDA_TOOLKIT_INCLUDE}
+            PATH_SUFFIXES include
             DOC "Path to cuDNN include directory." )
 
   # dynamic libs have different suffix in mac and linux
@@ -186,6 +187,7 @@ function(detect_cuDNN)
   get_filename_component(__libpath_hist ${CUDA_CUDART_LIBRARY} PATH)
   find_library(CUDNN_LIBRARY NAMES ${CUDNN_LIB_NAME}
    PATHS ${CUDNN_ROOT} $ENV{CUDNN_ROOT} ${CUDNN_INCLUDE} ${__libpath_hist} ${__libpath_hist}/../lib
+   PATH_SUFFIXES lib64 lib
    DOC "Path to cuDNN library.")
   
   if(CUDNN_INCLUDE AND CUDNN_LIBRARY)
